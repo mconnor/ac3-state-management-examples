@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Todo, Todos } from '../models/Todos'
+import React, { useState } from 'react'
+import { Todo } from '../models/Todos'
 import classnames from 'classnames'
 import TodoTextInput from './TodoTextInput'
-// import { ActionTypes } from '../interfaces'
+
 import { TodoMutationsType } from '../operations/mutations'
 
 type Props = {
@@ -15,8 +15,6 @@ export default function ({ todo, completeTodo, deleteTodo, editTodo }: Props): J
         editing: false
     })
 
-    const [element, setElement] = useState<React.ReactNode | null>()
-
 
     const handleSave = (id: number, text: string) => {
         if (text.length === 0) {
@@ -26,11 +24,6 @@ export default function ({ todo, completeTodo, deleteTodo, editTodo }: Props): J
         }
         setState({ editing: false })
     }
-
-    ///
-
-
-
 
 
     return (
