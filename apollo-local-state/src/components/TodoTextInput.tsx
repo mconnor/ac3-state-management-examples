@@ -24,9 +24,9 @@ export default function TodoTextInput({ onSave,
     const onUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
-    const handleSubmit = (e: React.MouseEvent) => {
+    const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
 
-        if (text) {
+        if (text && e.keyCode === 13) {
             onSave(text.trim())
             if (newTodo) {
                 setText('')
@@ -35,29 +35,30 @@ export default function TodoTextInput({ onSave,
         }
     }
     return (
-        <form>
-            <label>   Name: </label>
-            <input className={
-                classnames({
-                    edit: editing,
-                    'new-todo': newTodo
-                })}
-                // type="text"
-                placeholder={placeholder}
-                autoFocus={true}
-                value={text}
+        // <form>
+        //     <label><button type='button' onMouseDown={handleSubmit}>submit </button></label>
+        <input className={
+            classnames({
+                edit: editing,
+                'new-todo': newTodo
+            })}
+            // type="text"
+            placeholder={placeholder}
+            autoFocus={true}
+            value={text}
 
-                onBlur={(e) => {
-                    if (!newTodo) {
-                        onSave(e.target.value)
-                    }
-                }}
-                onChange={(e) => setText(e.target.value)}
+            onBlur={(e) => {
+                if (!newTodo) {
+                    onSave(e.target.value)
+                }
+            }}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleSubmit}
 
 
-            />
-            <button type='button' onMouseDown={handleSubmit}>submit </button>
-        </form>
+        />
+
+        // </form>
     )
 
 }
